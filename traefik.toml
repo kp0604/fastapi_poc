@@ -1,8 +1,15 @@
 [entryPoints]
     [entryPoints.web]
         address = ":80"
-    
+        [entryPoints.websecure]
+    address = ":443"
 
+[certificatesResolvers.myresolver]
+  [certificatesResolvers.myresolver.acme]
+    email = "work.kartikeya64@gmail.com"
+    storage = "acme.json"
+    [certificatesResolvers.myresolver.acme.tlsChallenge]
+    
 [api]
 insecure = true
 
@@ -14,3 +21,7 @@ level="DEBUG"
 [providers]
     [providers.docker]
         exposedByDefault = false
+
+[[tls.certificates]]
+  certFile = "/certs/cert.pem"
+  keyFile = "/certs/key.pem"
