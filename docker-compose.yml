@@ -1,9 +1,8 @@
-version: '3.8'
 services:
   app:
     build: .
     restart: unless-stopped
-    container_name: app-backend
+    container_name: fastapi_poc_backend
     volumes:
       - ./alembic:/alembic
     ports:
@@ -19,7 +18,7 @@ services:
       - traefik.http.routers.fastapi-secure.tls.certresolver=myresolver
 
   db:
-    container_name: backend_postgres
+    container_name: fastapi_poc_db
     image: postgres:12
     ports:
       - "5433:5432"
@@ -29,6 +28,7 @@ services:
       - ./.env
 
   traefik:
+    container_name: fastapi_poc_traefik
     image: traefik:v2.3
     ports:
       - "80:80"
